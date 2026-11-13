@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Turnos · Portal Clínica Respirar</title>
+  <link rel="icon" type="image/svg+xml" href="assets/img/isotipo.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <link rel="stylesheet" href="css/output.css">
+</head>
+<body class="flex min-h-screen flex-col">
+  <header class="border-b border-slate-200 bg-white">
+    <div class="mx-auto flex max-w-7xl flex-wrap items-center gap-x-6 gap-y-2 px-4 py-3">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="assets/img/isotipo.svg" alt="" class="h-9 w-9">
+        <span class="leading-tight">
+          <span class="block font-black text-brand-strong">Clínica Respirar</span>
+          <span class="block text-sm text-slate-500">Portal</span>
+        </span>
+      </a>
+      <nav id="menu" aria-label="Secciones del portal" class="flex flex-wrap gap-1 text-sm"></nav>
+    </div>
+  </header>
+
+  <main class="mx-auto w-full max-w-7xl flex-1 px-4 py-8">
+    <p id="cargando" class="text-center text-slate-500">Cargando…</p>
+
+    <div id="contenido" hidden>
+      <h1 class="mb-6 text-2xl font-black text-slate-900">Turnos</h1>
+
+      <p id="sin-agendas" hidden class="tarjeta text-slate-600">No hay agendas activas. Creá una en <a href="agendas.html" class="enlace">Agendas</a> y cargá su horario y sus prácticas.</p>
+
+      <div id="area-trabajo">
+        <section class="tarjeta mb-6 flex flex-wrap items-end gap-3" aria-label="Agenda y día">
+          <div class="min-w-[14rem] flex-1">
+            <label for="agenda" class="etiqueta-campo">Agenda</label>
+            <select id="agenda" class="campo"></select>
+          </div>
+          <div>
+            <label for="fecha" class="etiqueta-campo">Día</label>
+            <input id="fecha" type="date" class="campo">
+          </div>
+          <div class="flex gap-2">
+            <button id="dia-anterior" type="button" class="boton-secundario">← Anterior</button>
+            <button id="dia-hoy" type="button" class="boton-secundario">Hoy</button>
+            <button id="dia-siguiente" type="button" class="boton-secundario">Siguiente →</button>
+          </div>
+        </section>
+
+        <div class="grid items-start gap-6 xl:grid-cols-[minmax(0,1fr)_24rem]">
+          <section class="tarjeta" aria-labelledby="titulo-dia">
+            <div class="mb-1 flex flex-wrap items-baseline justify-between gap-2">
+              <h2 id="titulo-dia" class="text-lg font-medium text-slate-900"></h2>
+              <label class="flex items-center gap-2 text-sm text-slate-600">
+                <input id="mostrar-cancelados" type="checkbox" class="h-4 w-4 accent-brand-strong">
+                Mostrar cancelados
+              </label>
+            </div>
+            <p id="franjas-dia" class="mb-4 text-sm text-slate-600"></p>
+            <p id="mensaje" role="status" hidden class="aviso-exito"></p>
+            <p id="error-dia" role="alert" hidden class="aviso-error"></p>
+            <div class="overflow-x-auto">
+              <table class="tabla min-w-[46rem]">
+                <thead>
+                  <tr>
+                    <th>Hora</th>
+                    <th>Paciente</th>
+                    <th>Práctica</th>
+                    <th>Cobertura</th>
+                    <th>Estado</th>
+                    <th><span class="sr-only">Acciones</span></th>
+                  </tr>
+                </thead>
+                <tbody id="filas"></tbody>
+              </table>
+            </div>
+            <p id="vacio" hidden class="py-6 text-center text-slate-500"></p>
+          </section>
+
+          <section class="tarjeta" aria-label="Dar o reprogramar un turno">
+            <form id="form-turno" novalidate>
+              <h2 class="titulo-seccion">Dar turno</h2>
+              <p id="fecha-turno" class="-mt-3 mb-4 text-sm text-slate-500"></p>
+              <p id="error-turno" role="alert" hidden class="aviso-error"></p>
+              <div class="space-y-5">
+                <div>
+                  <label for="practica" class="etiqueta-campo">1. Consulta o práctica</label>
+                  <select id="practica" class="campo"></select>
+                </div>
+                <div>
+                  <p id="titulo-horarios" class="etiqueta-campo">2. Horario</p>
+                  <div id="horarios" class="flex flex-wrap gap-2" role="group" aria-labelledby="titulo-horarios"></div>
+                  <p id="sin-horarios" hidden class="text-sm text-slate-500"></p>
+                  <label class="mt-3 flex items-center gap-2 text-sm text-slate-600">
+                    <input id="sobreturno" type="checkbox" class="h-4 w-4 accent-brand-strong">
+                    Sobreturno: mostrar también los horarios ocupados
+                  </label>
+                </div>
+                <div>
+                  <p class="etiqueta-campo">3. Paciente</p>
+                  <div id="paciente-elegido" hidden class="flex items-center justify-between gap-2 rounded-lg bg-brand/10 px-3 py-2">
+                    <span id="nombre-paciente" class="font-medium text-brand-dark"></span>
+                    <button id="cambiar-paciente" type="button" class="enlace text-sm">Cambiar</button>
+                  </div>
+                  <div id="buscar-paciente">
+                    <div class="flex gap-2">
+                      <label for="texto-paciente" class="sr-only">Buscar paciente por documento o apellido</label>
+                      <input id="texto-paciente" class="campo min-w-0 flex-1" placeholder="Documento o apellido" autocomplete="off">
+                      <button id="boton-buscar-paciente" type="button" class="boton-secundario">Buscar</button>
+                    </div>
+                    <ul id="resultados-paciente" class="mt-2 divide-y divide-slate-100 rounded-lg ring-1 ring-slate-200 empty:hidden"></ul>
+                    <p class="ayuda-campo">¿No está? <a href="pacientes.html?nuevo=1" target="_blank" class="enlace">Cargalo en Pacientes</a> y después buscalo acá.</p>
+                  </div>
+                </div>
+                <div class="grid gap-4 sm:grid-cols-2">
+                  <div>
+                    <label for="cobertura" class="etiqueta-campo">4. Cobertura</label>
+                    <select id="cobertura" class="campo"></select>
+                    <p id="aviso-cobertura" class="ayuda-campo"></p>
+                  </div>
+                  <div>
+                    <label for="modalidad" class="etiqueta-campo">Modalidad</label>
+                    <select id="modalidad" class="campo">
+                      <option value="PRESENCIAL">Presencial</option>
+                      <option value="VIDEOLLAMADA">Videollamada</option>
+                    </select>
+                  </div>
+                </div>
+                <label class="flex items-center gap-2 text-slate-700">
+                  <input id="primera-vez" type="checkbox" class="h-4 w-4 accent-brand-strong">
+                  Primera vez en esta agenda
+                </label>
+                <div>
+                  <label for="motivo" class="etiqueta-campo">Motivo <span class="font-normal text-slate-400">(opcional)</span></label>
+                  <input id="motivo" class="campo" maxlength="500" autocomplete="off">
+                </div>
+                <button id="dar-turno" type="submit" class="boton w-full">Dar turno</button>
+              </div>
+            </form>
+
+            <form id="form-reprogramar" hidden novalidate>
+              <h2 class="titulo-seccion">Reprogramar turno</h2>
+              <p id="turno-a-reprogramar" class="mb-4 rounded-lg bg-slate-50 px-3 py-2 text-sm text-slate-700 ring-1 ring-slate-200"></p>
+              <p id="error-reprogramar" role="alert" hidden class="aviso-error"></p>
+              <div class="space-y-4">
+                <div class="max-w-xs">
+                  <label for="fecha-reprogramar" class="etiqueta-campo">Nuevo día</label>
+                  <input id="fecha-reprogramar" type="date" class="campo">
+                </div>
+                <div>
+                  <p id="titulo-horarios-reprogramar" class="etiqueta-campo">Nuevo horario</p>
+                  <div id="horarios-reprogramar" class="flex flex-wrap gap-2" role="group" aria-labelledby="titulo-horarios-reprogramar"></div>
+                  <p id="sin-horarios-reprogramar" hidden class="text-sm text-slate-500"></p>
+                  <label class="mt-3 flex items-center gap-2 text-sm text-slate-600">
+                    <input id="sobreturno-reprogramar" type="checkbox" class="h-4 w-4 accent-brand-strong">
+                    Sobreturno: mostrar también los horarios ocupados
+                  </label>
+                </div>
+                <p class="text-sm text-slate-500">El turno actual queda cancelado con motivo "Reprogramado" y se da uno nuevo con la misma práctica, paciente y cobertura.</p>
+                <div class="flex flex-wrap gap-2">
+                  <button id="confirmar-reprogramar" type="submit" class="boton">Confirmar nuevo horario</button>
+                  <button id="volver-reprogramar" type="button" class="boton-secundario">Volver</button>
+                </div>
+              </div>
+            </form>
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script type="module" src="js/turnos.js"></script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+{
+  "name": "portal-demo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Demostración del portal de Clínica Respirar: las mismas pantallas y funciones, sin backend y con datos ficticios",
+  "scripts": {
+    "dev": "npx @tailwindcss/cli -i ./css/stylesheet.css -o ./css/output.css --watch",
+    "build": "npx @tailwindcss/cli -i ./css/stylesheet.css -o ./css/output.css --minify",
+    "servir": "npx -y serve . -l 5174"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "tailwindcss": "^4.3.3"
+  }
+}

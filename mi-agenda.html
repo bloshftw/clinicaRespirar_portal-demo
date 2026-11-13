@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Mi agenda · Portal Clínica Respirar</title>
+  <link rel="icon" type="image/svg+xml" href="assets/img/isotipo.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <link rel="stylesheet" href="css/output.css">
+</head>
+<body class="flex min-h-screen flex-col">
+  <header class="border-b border-slate-200 bg-white">
+    <div class="mx-auto flex max-w-7xl flex-wrap items-center gap-x-6 gap-y-2 px-4 py-3">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="assets/img/isotipo.svg" alt="" class="h-9 w-9">
+        <span class="leading-tight">
+          <span class="block font-black text-brand-strong">Clínica Respirar</span>
+          <span class="block text-sm text-slate-500">Portal</span>
+        </span>
+      </a>
+      <nav id="menu" aria-label="Secciones del portal" class="flex flex-wrap gap-1 text-sm"></nav>
+    </div>
+  </header>
+
+  <main class="mx-auto w-full max-w-7xl flex-1 px-4 py-8">
+    <p id="cargando" class="text-center text-slate-500">Cargando…</p>
+
+    <div id="contenido" hidden>
+      <h1 class="mb-1 text-2xl font-black text-slate-900">Mi agenda</h1>
+      <p id="nombre-agenda" class="mb-6 text-slate-600"></p>
+
+      <p id="error-general" role="alert" hidden class="aviso-error"></p>
+
+      <div id="area-trabajo">
+        <section class="tarjeta mb-6 flex flex-wrap items-end gap-3" aria-label="Día">
+          <div>
+            <label for="fecha" class="etiqueta-campo">Día</label>
+            <input id="fecha" type="date" class="campo">
+          </div>
+          <div class="flex gap-2">
+            <button id="dia-anterior" type="button" class="boton-secundario">← Anterior</button>
+            <button id="dia-hoy" type="button" class="boton-secundario">Hoy</button>
+            <button id="dia-siguiente" type="button" class="boton-secundario">Siguiente →</button>
+          </div>
+        </section>
+
+        <section class="tarjeta" aria-labelledby="titulo-dia">
+          <div class="mb-1 flex flex-wrap items-baseline justify-between gap-2">
+            <h2 id="titulo-dia" class="text-lg font-medium text-slate-900"></h2>
+            <label class="flex items-center gap-2 text-sm text-slate-600">
+              <input id="mostrar-cancelados" type="checkbox" class="h-4 w-4 accent-brand-strong">
+              Mostrar cancelados
+            </label>
+          </div>
+          <p id="franjas-dia" class="mb-3 text-sm text-slate-600"></p>
+          <div id="resumen" class="mb-4 flex flex-wrap gap-2"></div>
+          <div class="overflow-x-auto">
+            <table class="tabla min-w-[44rem]">
+              <thead>
+                <tr>
+                  <th>Hora</th>
+                  <th>Paciente</th>
+                  <th>Práctica</th>
+                  <th>Cobertura</th>
+                  <th>Estado</th>
+                  <th><span class="sr-only">Informes</span></th>
+                </tr>
+              </thead>
+              <tbody id="filas"></tbody>
+            </table>
+          </div>
+          <p id="vacio" hidden class="py-6 text-center text-slate-500">No hay turnos este día.</p>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script type="module" src="js/mi-agenda.js"></script>
+</body>
+</html>

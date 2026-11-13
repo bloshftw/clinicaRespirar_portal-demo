@@ -1,0 +1,100 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Contents 4 0 R /Resources << /Font << /F1 5 0 R /F2 6 0 R >> >> >>
+endobj
+4 0 obj
+<< /Length 3362 >>
+stream
+0.93 g 0 770 595 72 re f
+0 g
+BT /F2 20 Tf 0 g 50 805 Td (Clínica Respirar) Tj ET
+BT /F1 10 Tf 0.35 g 50 788 Td (Neumología · Estudios funcionales respiratorios) Tj ET
+BT /F1 9 Tf 0.35 g 400 805 Td (Villa Mercedes, San Luis) Tj ET
+BT /F1 9 Tf 0.35 g 400 791 Td (respirarvm.com.ar) Tj ET
+1 w 0.75 G 0 770 m 595 770 l S
+BT /F2 15 Tf 0 g 50 730 Td (Informe de espirometría) Tj ET
+BT /F1 10 Tf 0.35 g 50 712 Td (Estudio funcional respiratorio con prueba broncodilatadora) Tj ET
+BT /F2 11 Tf 0 g 50 675 Td (Resultados) Tj ET
+0.9 g 50 640 495 22 re f
+0 g
+BT /F2 9.5 Tf 0 g 54 647 Td (Parámetro) Tj ET
+BT /F2 9.5 Tf 0 g 194 647 Td (Teórico) Tj ET
+BT /F2 9.5 Tf 0 g 274 647 Td (Pre-BD) Tj ET
+BT /F2 9.5 Tf 0 g 344 647 Td (% teórico) Tj ET
+BT /F2 9.5 Tf 0 g 414 647 Td (Post-BD) Tj ET
+BT /F2 9.5 Tf 0 g 494 647 Td (% teórico) Tj ET
+BT /F1 10 Tf 0 g 54 620 Td (FVC \(L\)) Tj ET
+BT /F1 10 Tf 0 g 194 620 Td (3,89) Tj ET
+BT /F1 10 Tf 0 g 274 620 Td (3,82) Tj ET
+BT /F1 10 Tf 0 g 344 620 Td (98 %) Tj ET
+BT /F1 10 Tf 0 g 414 620 Td (3,90) Tj ET
+BT /F1 10 Tf 0 g 494 620 Td (100 %) Tj ET
+0.3 w 0.75 G 50 612 m 545 612 l S
+BT /F1 10 Tf 0 g 54 596 Td (FEV1 \(L\)) Tj ET
+BT /F1 10 Tf 0 g 194 596 Td (3,22) Tj ET
+BT /F1 10 Tf 0 g 274 596 Td (2,94) Tj ET
+BT /F1 10 Tf 0 g 344 596 Td (91 %) Tj ET
+BT /F1 10 Tf 0 g 414 596 Td (3,15) Tj ET
+BT /F1 10 Tf 0 g 494 596 Td (98 %) Tj ET
+0.3 w 0.75 G 50 588 m 545 588 l S
+BT /F1 10 Tf 0 g 54 572 Td (FEV1 / FVC \(%\)) Tj ET
+BT /F1 10 Tf 0 g 194 572 Td (82) Tj ET
+BT /F1 10 Tf 0 g 274 572 Td (77) Tj ET
+BT /F1 10 Tf 0 g 344 572 Td (94 %) Tj ET
+BT /F1 10 Tf 0 g 414 572 Td (81) Tj ET
+BT /F1 10 Tf 0 g 494 572 Td (99 %) Tj ET
+0.3 w 0.75 G 50 564 m 545 564 l S
+BT /F1 10 Tf 0 g 54 548 Td (FEF 25-75 \(L/s\)) Tj ET
+BT /F1 10 Tf 0 g 194 548 Td (3,70) Tj ET
+BT /F1 10 Tf 0 g 274 548 Td (2,90) Tj ET
+BT /F1 10 Tf 0 g 344 548 Td (78 %) Tj ET
+BT /F1 10 Tf 0 g 414 548 Td (3,40) Tj ET
+BT /F1 10 Tf 0 g 494 548 Td (92 %) Tj ET
+0.3 w 0.75 G 50 540 m 545 540 l S
+BT /F1 10 Tf 0 g 54 524 Td (PEF \(L/s\)) Tj ET
+BT /F1 10 Tf 0 g 194 524 Td (8,10) Tj ET
+BT /F1 10 Tf 0 g 274 524 Td (7,20) Tj ET
+BT /F1 10 Tf 0 g 344 524 Td (89 %) Tj ET
+BT /F1 10 Tf 0 g 414 524 Td (7,80) Tj ET
+BT /F1 10 Tf 0 g 494 524 Td (96 %) Tj ET
+0.3 w 0.75 G 50 516 m 545 516 l S
+BT /F2 11 Tf 0 g 50 468 Td (Interpretación) Tj ET
+BT /F1 10.5 Tf 0 g 50 446 Td (Espirometría con curva de buena calidad y maniobras reproducibles, realizada según los criterios) Tj ET
+BT /F1 10.5 Tf 0 g 50 430 Td (de aceptabilidad de la ATS/ERS. Los valores basales se encuentran dentro de los límites de) Tj ET
+BT /F1 10.5 Tf 0 g 50 414 Td (referencia. Se observa un incremento del FEV1 de 210 ml \(7 %\) luego de la administración de) Tj ET
+BT /F1 10.5 Tf 0 g 50 398 Td (broncodilatador, que no alcanza el umbral para considerarse respuesta significativa.) Tj ET
+BT /F2 11 Tf 0 g 50 360 Td (Conclusión) Tj ET
+BT /F1 10.5 Tf 0 g 50 340 Td (Espirometría dentro de parámetros normales. Prueba broncodilatadora sin respuesta significativa.) Tj ET
+BT /F1 10.5 Tf 0 g 50 324 Td (Se sugiere control clínico según evolución.) Tj ET
+0.6 w 0.75 G 380 190 m 545 190 l S
+BT /F1 10 Tf 0.35 g 395 175 Td (Firma y sello del profesional) Tj ET
+0.4 w 0.75 G 50 60 m 545 60 l S
+BT /F1 8.5 Tf 0.35 g 50 46 Td (Documento emitido por el sistema de gestión de Clínica Respirar. Válido con firma y sello del profesional.) Tj ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+6 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000251 00000 n 
+0000003664 00000 n 
+0000003761 00000 n 
+trailer
+<< /Size 7 /Root 1 0 R >>
+startxref
+3863
+%%EOF

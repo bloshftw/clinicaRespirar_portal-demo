@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Profesionales · Portal Clínica Respirar</title>
+  <link rel="icon" type="image/svg+xml" href="assets/img/isotipo.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <link rel="stylesheet" href="css/output.css">
+</head>
+<body class="flex min-h-screen flex-col">
+  <header class="border-b border-slate-200 bg-white">
+    <div class="mx-auto flex max-w-6xl flex-wrap items-center gap-x-6 gap-y-2 px-4 py-3">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="assets/img/isotipo.svg" alt="" class="h-9 w-9">
+        <span class="leading-tight">
+          <span class="block font-black text-brand-strong">Clínica Respirar</span>
+          <span class="block text-sm text-slate-500">Portal</span>
+        </span>
+      </a>
+      <nav id="menu" aria-label="Secciones del portal" class="flex flex-wrap gap-1 text-sm"></nav>
+    </div>
+  </header>
+
+  <main class="mx-auto w-full max-w-6xl flex-1 px-4 py-8">
+    <p id="cargando" class="text-center text-slate-500">Cargando…</p>
+
+    <div id="contenido" hidden>
+      <h1 class="mb-1 text-2xl font-black text-slate-900">Profesionales</h1>
+      <p class="mb-6 text-slate-600">Cada profesional tiene su cuenta: ingresa al portal con su DNI. Su agenda se configura en <a href="agendas.html" class="enlace">Agendas</a>.</p>
+
+      <div class="grid items-start gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
+        <section class="tarjeta" aria-labelledby="titulo-listado">
+          <h2 id="titulo-listado" class="titulo-seccion">Listado</h2>
+          <p id="mensaje" role="status" hidden class="aviso-exito"></p>
+          <p id="error-lista" role="alert" hidden class="aviso-error"></p>
+          <div class="overflow-x-auto">
+            <table class="tabla min-w-[36rem]">
+              <thead>
+                <tr>
+                  <th>Profesional</th>
+                  <th>Especialidad</th>
+                  <th>Matrícula</th>
+                  <th>DNI</th>
+                  <th><span class="sr-only">Acciones</span></th>
+                </tr>
+              </thead>
+              <tbody id="filas"></tbody>
+            </table>
+          </div>
+          <p id="vacio" hidden class="py-6 text-center text-slate-500">Todavía no hay profesionales cargados.</p>
+        </section>
+
+        <section id="panel-formulario" class="tarjeta" hidden aria-labelledby="titulo-formulario">
+          <h2 id="titulo-formulario" class="titulo-seccion">Nuevo profesional</h2>
+          <p class="mb-4 text-sm text-slate-500">Si el DNI no tiene cuenta, se crea con el DNI como contraseña inicial y debe cambiarla al ingresar. Si ya tiene una (por ejemplo, es paciente), se le agrega el rol de profesional.</p>
+          <form id="formulario" class="space-y-4" novalidate>
+            <p id="error" role="alert" hidden class="aviso-error"></p>
+            <div>
+              <label for="dni" class="etiqueta-campo">DNI</label>
+              <input id="dni" class="campo" inputmode="numeric" maxlength="10" autocomplete="off" placeholder="30111222">
+            </div>
+            <div class="grid grid-cols-[6rem_minmax(0,1fr)] gap-3">
+              <div>
+                <label for="titulo" class="etiqueta-campo">Título</label>
+                <select id="titulo" class="campo">
+                  <option value="DR">Dr.</option>
+                  <option value="DRA">Dra.</option>
+                  <option value="LIC">Lic.</option>
+                </select>
+              </div>
+              <div>
+                <label for="nombre" class="etiqueta-campo">Nombre</label>
+                <input id="nombre" class="campo" maxlength="100" autocomplete="off">
+              </div>
+            </div>
+            <div>
+              <label for="apellido" class="etiqueta-campo">Apellido</label>
+              <input id="apellido" class="campo" maxlength="100" autocomplete="off">
+            </div>
+            <div>
+              <label for="especialidad" class="etiqueta-campo">Especialidad</label>
+              <select id="especialidad" class="campo"></select>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label for="matricula-tipo" class="etiqueta-campo">Matrícula</label>
+                <select id="matricula-tipo" class="campo">
+                  <option value="">Sin matrícula</option>
+                  <option value="MP">MP (provincial)</option>
+                  <option value="MN">MN (nacional)</option>
+                </select>
+              </div>
+              <div>
+                <label for="matricula-numero" class="etiqueta-campo">Número</label>
+                <input id="matricula-numero" class="campo" maxlength="20" autocomplete="off">
+              </div>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <button id="guardar" type="submit" class="boton">Crear profesional</button>
+              <button id="cancelar-edicion" type="button" class="boton-secundario" hidden>Cancelar</button>
+            </div>
+          </form>
+        </section>
+
+        <p id="aviso-solo-admin" hidden class="tarjeta text-sm text-slate-600">Los profesionales los da de alta el administrador, junto con su cuenta.</p>
+      </div>
+    </div>
+  </main>
+
+  <script type="module" src="js/profesionales.js"></script>
+</body>
+</html>

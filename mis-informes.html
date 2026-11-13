@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Mis informes · Portal Clínica Respirar</title>
+  <link rel="icon" type="image/svg+xml" href="assets/img/isotipo.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <link rel="stylesheet" href="css/output.css">
+</head>
+<body class="flex min-h-screen flex-col">
+  <header class="border-b border-slate-200 bg-white">
+    <div class="mx-auto flex max-w-3xl flex-wrap items-center gap-x-6 gap-y-2 px-4 py-3">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="assets/img/isotipo.svg" alt="" class="h-9 w-9">
+        <span class="leading-tight">
+          <span class="block font-black text-brand-strong">Clínica Respirar</span>
+          <span class="block text-sm text-slate-500">Portal</span>
+        </span>
+      </a>
+      <nav id="menu" aria-label="Secciones del portal" class="flex flex-wrap gap-1 text-sm"></nav>
+    </div>
+  </header>
+
+  <main class="mx-auto w-full max-w-3xl flex-1 px-4 py-8">
+    <p id="cargando" class="text-center text-slate-500">Cargando…</p>
+
+    <div id="contenido" hidden>
+      <h1 class="mb-1 text-2xl font-black text-slate-900">Mis informes</h1>
+      <p class="mb-6 text-slate-600">Los informes de tus consultas y estudios en la clínica. Podés verlos en el navegador o descargarlos en PDF.</p>
+
+      <p id="error" role="alert" hidden class="aviso-error"></p>
+      <ul id="lista" class="space-y-4"></ul>
+      <div id="vacio" hidden class="tarjeta text-center">
+        <p class="font-medium text-slate-900">Todavía no tenés informes.</p>
+        <p class="mt-1 text-sm text-slate-600">Cuando el profesional o el laboratorio cargue el informe de tu consulta o estudio, va a aparecer acá.</p>
+      </div>
+    </div>
+  </main>
+
+  <script type="module" src="js/mis-informes.js"></script>
+</body>
+</html>

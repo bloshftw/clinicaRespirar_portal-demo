@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Pacientes · Portal Clínica Respirar</title>
+  <link rel="icon" type="image/svg+xml" href="assets/img/isotipo.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <link rel="stylesheet" href="css/output.css">
+</head>
+<body class="flex min-h-screen flex-col">
+  <header class="border-b border-slate-200 bg-white">
+    <div class="mx-auto flex max-w-6xl flex-wrap items-center gap-x-6 gap-y-2 px-4 py-3">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="assets/img/isotipo.svg" alt="" class="h-9 w-9">
+        <span class="leading-tight">
+          <span class="block font-black text-brand-strong">Clínica Respirar</span>
+          <span class="block text-sm text-slate-500">Portal</span>
+        </span>
+      </a>
+      <nav id="menu" aria-label="Secciones del portal" class="flex flex-wrap gap-1 text-sm"></nav>
+    </div>
+  </header>
+
+  <main class="mx-auto w-full max-w-6xl flex-1 px-4 py-8">
+    <p id="cargando" class="text-center text-slate-500">Cargando…</p>
+
+    <div id="contenido" hidden>
+      <div class="mb-6 flex flex-wrap items-end justify-between gap-3">
+        <div>
+          <h1 class="mb-1 text-2xl font-black text-slate-900">Pacientes</h1>
+          <p class="text-slate-600">Al dar de alta un paciente se crea su cuenta: usuario y contraseña inicial son su número de documento.</p>
+        </div>
+        <button id="nuevo" type="button" class="boton">Nuevo paciente</button>
+      </div>
+
+      <section id="panel-formulario" class="tarjeta mb-6" hidden aria-labelledby="titulo-formulario">
+        <h2 id="titulo-formulario" class="titulo-seccion">Nuevo paciente</h2>
+        <form id="formulario" novalidate>
+          <p id="error" role="alert" hidden class="aviso-error"></p>
+          <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div>
+              <label for="tipo-documento" class="etiqueta-campo">Tipo de documento</label>
+              <select id="tipo-documento" class="campo">
+                <option value="DNI">DNI</option>
+                <option value="PASAPORTE">Pasaporte</option>
+                <option value="OTRO">Otro</option>
+              </select>
+            </div>
+            <div>
+              <label for="numero-documento" class="etiqueta-campo">Número</label>
+              <input id="numero-documento" class="campo" maxlength="20" autocomplete="off" placeholder="30111222">
+            </div>
+            <div>
+              <label for="nombre" class="etiqueta-campo">Nombre</label>
+              <input id="nombre" class="campo" maxlength="100" autocomplete="off">
+            </div>
+            <div>
+              <label for="apellido" class="etiqueta-campo">Apellido</label>
+              <input id="apellido" class="campo" maxlength="100" autocomplete="off">
+            </div>
+            <div>
+              <label for="fecha-nacimiento" class="etiqueta-campo">Fecha de nacimiento</label>
+              <input id="fecha-nacimiento" type="date" class="campo">
+              <p id="edad" class="ayuda-campo"></p>
+            </div>
+            <div>
+              <label for="sexo" class="etiqueta-campo">Sexo</label>
+              <select id="sexo" class="campo">
+                <option value="">Sin indicar</option>
+                <option value="F">F</option>
+                <option value="M">M</option>
+                <option value="X">X</option>
+              </select>
+            </div>
+            <div class="sm:col-span-2">
+              <label for="telefono" class="etiqueta-campo">Teléfono (WhatsApp)</label>
+              <input id="telefono" type="tel" class="campo" maxlength="20" placeholder="2657 123456" autocomplete="off">
+              <p class="ayuda-campo">Con código de área, sin 0 ni 15. Se guarda con el +549 adelante.</p>
+            </div>
+            <div>
+              <label for="localidad" class="etiqueta-campo">Localidad</label>
+              <input id="localidad" class="campo" maxlength="100" autocomplete="off" placeholder="Villa Mercedes">
+            </div>
+            <div>
+              <label for="provincia" class="etiqueta-campo">Provincia <span class="font-normal text-slate-400">(opcional)</span></label>
+              <input id="provincia" class="campo" maxlength="100" autocomplete="off">
+            </div>
+            <div class="sm:col-span-2">
+              <label for="domicilio" class="etiqueta-campo">Domicilio <span class="font-normal text-slate-400">(opcional)</span></label>
+              <input id="domicilio" class="campo" maxlength="200" autocomplete="off">
+            </div>
+            <div class="sm:col-span-2 lg:col-span-1">
+              <label for="obra-social" class="etiqueta-campo">Obra social habitual</label>
+              <select id="obra-social" class="campo"></select>
+            </div>
+            <div>
+              <label for="numero-afiliado" class="etiqueta-campo">N.º de afiliado</label>
+              <input id="numero-afiliado" class="campo" maxlength="50" autocomplete="off" disabled>
+            </div>
+          </div>
+
+          <fieldset id="responsable" hidden class="mt-6 rounded-xl border border-slate-200 p-4">
+            <legend class="px-1 text-sm font-medium text-slate-700">Responsable: obligatorio para menores de 18 años</legend>
+            <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+              <div>
+                <label for="responsable-nombre" class="etiqueta-campo">Nombre</label>
+                <input id="responsable-nombre" class="campo" maxlength="100" autocomplete="off">
+              </div>
+              <div>
+                <label for="responsable-apellido" class="etiqueta-campo">Apellido</label>
+                <input id="responsable-apellido" class="campo" maxlength="100" autocomplete="off">
+              </div>
+              <div>
+                <label for="responsable-documento" class="etiqueta-campo">Documento</label>
+                <input id="responsable-documento" class="campo" maxlength="20" autocomplete="off">
+              </div>
+              <div>
+                <label for="responsable-telefono" class="etiqueta-campo">Teléfono</label>
+                <input id="responsable-telefono" type="tel" class="campo" maxlength="20" autocomplete="off" placeholder="2657 123456">
+              </div>
+              <div>
+                <label for="responsable-relacion" class="etiqueta-campo">Relación</label>
+                <select id="responsable-relacion" class="campo">
+                  <option value="MADRE">Madre</option>
+                  <option value="PADRE">Padre</option>
+                  <option value="TUTOR">Tutor</option>
+                </select>
+              </div>
+            </div>
+          </fieldset>
+
+          <div class="mt-6 flex flex-wrap gap-2">
+            <button id="guardar" type="submit" class="boton">Crear paciente</button>
+            <button id="cancelar" type="button" class="boton-secundario">Cancelar</button>
+          </div>
+        </form>
+
+        <div id="turnos-paciente" hidden class="mt-8 border-t border-slate-200 pt-6">
+          <h3 class="mb-3 font-medium text-slate-900">Turnos</h3>
+          <ul id="lista-turnos" class="space-y-1 text-sm"></ul>
+          <p id="sin-turnos" hidden class="text-sm text-slate-500">Todavía no tiene turnos.</p>
+        </div>
+      </section>
+
+      <section class="tarjeta" aria-label="Búsqueda de pacientes">
+        <form id="buscador" role="search" class="mb-4 flex flex-wrap gap-2" novalidate>
+          <label for="texto-busqueda" class="sr-only">Buscar paciente</label>
+          <input id="texto-busqueda" class="campo min-w-0 flex-1" placeholder="Documento, apellido o nombre" autocomplete="off">
+          <button id="buscar" type="submit" class="boton">Buscar</button>
+        </form>
+        <p id="mensaje" role="status" hidden class="aviso-exito"></p>
+        <p id="error-busqueda" role="alert" hidden class="aviso-error"></p>
+        <div class="overflow-x-auto">
+          <table class="tabla min-w-[44rem]">
+            <thead>
+              <tr>
+                <th>Paciente</th>
+                <th>Documento</th>
+                <th>Edad</th>
+                <th>Teléfono</th>
+                <th>Obra social</th>
+                <th><span class="sr-only">Acciones</span></th>
+              </tr>
+            </thead>
+            <tbody id="filas"></tbody>
+          </table>
+        </div>
+        <p id="vacio" hidden class="py-6 text-center text-slate-500">No hay pacientes que coincidan con la búsqueda.</p>
+        <p class="mt-3 text-xs text-slate-500">Se muestran hasta 50 resultados. Para encontrar a alguien en particular, buscá por su documento.</p>
+      </section>
+    </div>
+  </main>
+
+  <script type="module" src="js/pacientes.js"></script>
+</body>
+</html>

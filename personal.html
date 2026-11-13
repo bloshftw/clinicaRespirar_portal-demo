@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Personal · Portal Clínica Respirar</title>
+  <link rel="icon" type="image/svg+xml" href="assets/img/isotipo.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <link rel="stylesheet" href="css/output.css">
+</head>
+<body class="flex min-h-screen flex-col">
+  <header class="border-b border-slate-200 bg-white">
+    <div class="mx-auto flex max-w-6xl flex-wrap items-center gap-x-6 gap-y-2 px-4 py-3">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="assets/img/isotipo.svg" alt="" class="h-9 w-9">
+        <span class="leading-tight">
+          <span class="block font-black text-brand-strong">Clínica Respirar</span>
+          <span class="block text-sm text-slate-500">Portal</span>
+        </span>
+      </a>
+      <nav id="menu" aria-label="Secciones del portal" class="flex flex-wrap gap-1 text-sm"></nav>
+    </div>
+  </header>
+
+  <main class="mx-auto w-full max-w-6xl flex-1 px-4 py-8">
+    <p id="cargando" class="text-center text-slate-500">Cargando…</p>
+
+    <div id="contenido" hidden>
+      <h1 class="mb-6 text-2xl font-black text-slate-900">Personal</h1>
+
+      <section class="mb-8 rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
+        <h2 class="mb-1 text-lg font-medium text-slate-900">Nueva cuenta</h2>
+        <p class="mb-5 text-sm text-slate-500">La contraseña inicial es el número de documento: en su primer ingreso se le pide cambiarla.</p>
+        <form id="formulario" novalidate>
+          <p id="error" role="alert" hidden class="mb-4 rounded-lg bg-red-50 px-3 py-2.5 text-sm text-red-700 ring-1 ring-red-200"></p>
+          <p id="exito" role="status" hidden class="mb-4 rounded-lg bg-green-50 px-3 py-2.5 text-sm text-green-800 ring-1 ring-green-200"></p>
+
+          <div class="grid gap-4 sm:grid-cols-3">
+            <div>
+              <label for="dni" class="mb-1.5 block text-sm font-medium text-slate-700">DNI</label>
+              <input id="dni" inputmode="numeric" maxlength="10" placeholder="30111222" required
+                class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 outline-none focus:border-brand-strong focus:ring-2 focus:ring-brand/30">
+            </div>
+            <div>
+              <label for="nombre" class="mb-1.5 block text-sm font-medium text-slate-700">Nombre</label>
+              <input id="nombre" maxlength="100" autocomplete="off" required
+                class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 outline-none focus:border-brand-strong focus:ring-2 focus:ring-brand/30">
+            </div>
+            <div>
+              <label for="apellido" class="mb-1.5 block text-sm font-medium text-slate-700">Apellido</label>
+              <input id="apellido" maxlength="100" autocomplete="off" required
+                class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 outline-none focus:border-brand-strong focus:ring-2 focus:ring-brand/30">
+            </div>
+          </div>
+
+          <fieldset class="mt-4">
+            <legend class="mb-2 text-sm font-medium text-slate-700">Roles</legend>
+            <div class="flex flex-wrap gap-x-6 gap-y-2">
+              <label class="flex items-center gap-2 text-slate-700"><input type="checkbox" name="rol" value="SECRETARIA" class="h-4 w-4 accent-brand-strong"> Secretaría</label>
+              <label class="flex items-center gap-2 text-slate-700"><input type="checkbox" name="rol" value="LABORATORIO" class="h-4 w-4 accent-brand-strong"> Laboratorio</label>
+              <label class="flex items-center gap-2 text-slate-700"><input type="checkbox" name="rol" value="ADMIN" class="h-4 w-4 accent-brand-strong"> Administración</label>
+            </div>
+            <p class="mt-2 text-sm text-slate-500">Los profesionales se cargan en <a href="profesionales.html" class="font-medium text-brand-strong hover:underline">Profesionales</a>, junto con su especialidad y matrícula.</p>
+          </fieldset>
+
+          <button id="crear" type="submit"
+            class="mt-5 rounded-lg bg-brand-strong px-5 py-2.5 font-medium text-white hover:bg-brand-dark disabled:cursor-wait disabled:opacity-60">Crear cuenta</button>
+        </form>
+      </section>
+
+      <section class="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
+        <h2 class="mb-4 text-lg font-medium text-slate-900">Cuentas del personal</h2>
+        <p id="mensaje-lista" role="status" hidden class="mb-4 rounded-lg bg-green-50 px-3 py-2.5 text-sm text-green-800 ring-1 ring-green-200"></p>
+        <p id="error-lista" role="alert" hidden class="mb-4 rounded-lg bg-red-50 px-3 py-2.5 text-sm text-red-700 ring-1 ring-red-200"></p>
+        <div class="overflow-x-auto">
+          <table class="w-full min-w-[40rem] text-left text-sm">
+            <thead class="border-b border-slate-200 text-slate-500">
+              <tr>
+                <th class="py-2 pr-4 font-medium">Nombre</th>
+                <th class="py-2 pr-4 font-medium">DNI</th>
+                <th class="py-2 pr-4 font-medium">Roles</th>
+                <th class="py-2 pr-4 font-medium">Estado</th>
+                <th class="py-2 font-medium"><span class="sr-only">Acciones</span></th>
+              </tr>
+            </thead>
+            <tbody id="filas" class="divide-y divide-slate-100"></tbody>
+          </table>
+        </div>
+        <p id="vacio" hidden class="py-6 text-center text-slate-500">Todavía no hay cuentas del personal.</p>
+      </section>
+    </div>
+  </main>
+
+  <script type="module" src="js/personal.js"></script>
+</body>
+</html>

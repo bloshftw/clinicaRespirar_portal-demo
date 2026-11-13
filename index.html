@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Portal · Clínica Respirar</title>
+  <link rel="icon" type="image/svg+xml" href="assets/img/isotipo.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <link rel="stylesheet" href="css/output.css">
+</head>
+<body class="flex min-h-screen flex-col">
+  <header class="border-b border-slate-200 bg-white">
+    <div class="mx-auto flex max-w-6xl flex-wrap items-center gap-x-6 gap-y-2 px-4 py-3">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="assets/img/isotipo.svg" alt="" class="h-9 w-9">
+        <span class="leading-tight">
+          <span class="block font-black text-brand-strong">Clínica Respirar</span>
+          <span class="block text-sm text-slate-500">Portal</span>
+        </span>
+      </a>
+      <nav id="menu" aria-label="Secciones del portal" class="flex flex-wrap gap-1 text-sm"></nav>
+    </div>
+  </header>
+
+  <main class="mx-auto w-full max-w-4xl flex-1 px-4 py-10">
+    <p id="cargando" class="text-center text-slate-500">Cargando…</p>
+
+    <div id="contenido" hidden>
+      <h1 id="saludo" class="mb-2 text-2xl font-black text-slate-900">Bienvenido</h1>
+      <div class="mb-8 flex flex-wrap items-center gap-2 text-slate-600">
+        <span>Ingresaste con estos roles:</span>
+        <ul id="roles" class="flex flex-wrap gap-2"></ul>
+      </div>
+
+      <div id="accesos" class="mb-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"></div>
+      <p id="sin-accesos" hidden class="tarjeta mb-8 text-slate-600">Próximamente: tus turnos y las herramientas de tu rol.</p>
+
+      <div class="flex flex-wrap gap-3">
+        <a href="cambiar-clave.html" class="boton-secundario">Cambiar contraseña</a>
+        <button id="salir" type="button" class="boton-secundario">Salir</button>
+      </div>
+    </div>
+  </main>
+
+  <script type="module" src="js/inicio.js"></script>
+</body>
+</html>

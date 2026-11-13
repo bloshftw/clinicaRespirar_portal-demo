@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Configurar agenda · Portal Clínica Respirar</title>
+  <link rel="icon" type="image/svg+xml" href="assets/img/isotipo.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <link rel="stylesheet" href="css/output.css">
+</head>
+<body class="flex min-h-screen flex-col">
+  <header class="border-b border-slate-200 bg-white">
+    <div class="mx-auto flex max-w-6xl flex-wrap items-center gap-x-6 gap-y-2 px-4 py-3">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="assets/img/isotipo.svg" alt="" class="h-9 w-9">
+        <span class="leading-tight">
+          <span class="block font-black text-brand-strong">Clínica Respirar</span>
+          <span class="block text-sm text-slate-500">Portal</span>
+        </span>
+      </a>
+      <nav id="menu" aria-label="Secciones del portal" class="flex flex-wrap gap-1 text-sm"></nav>
+    </div>
+  </header>
+
+  <main class="mx-auto w-full max-w-6xl flex-1 px-4 py-8">
+    <p id="cargando" class="text-center text-slate-500">Cargando…</p>
+
+    <div id="contenido" hidden>
+      <a href="agendas.html" class="enlace text-sm">← Volver a Agendas</a>
+      <div class="mb-6 mt-2 flex flex-wrap items-center gap-3">
+        <h1 id="nombre-agenda" class="text-2xl font-black text-slate-900">Agenda</h1>
+        <span id="tipo-agenda"></span>
+      </div>
+      <p id="aviso-nueva" hidden class="aviso-exito">Agenda creada. Cargá su horario habitual y sus prácticas para empezar a dar turnos.</p>
+      <p id="error-general" role="alert" hidden class="aviso-error"></p>
+
+      <div class="grid items-start gap-6 lg:grid-cols-2">
+        <section class="tarjeta" aria-labelledby="titulo-datos">
+          <h2 id="titulo-datos" class="titulo-seccion">Datos</h2>
+          <form id="form-datos" class="space-y-4" novalidate>
+            <p id="error-datos" role="alert" hidden class="aviso-error"></p>
+            <p id="exito-datos" role="status" hidden class="aviso-exito"></p>
+            <div>
+              <label for="datos-nombre" class="etiqueta-campo">Nombre</label>
+              <input id="datos-nombre" class="campo" maxlength="100" autocomplete="off">
+            </div>
+            <div>
+              <label for="datos-paso" class="etiqueta-campo">Grilla de turnos, en minutos</label>
+              <input id="datos-paso" type="number" class="campo" min="5" max="240" step="5">
+            </div>
+            <label class="flex items-center gap-2 text-slate-700">
+              <input id="datos-activa" type="checkbox" class="h-4 w-4 accent-brand-strong">
+              Activa: se pueden dar turnos nuevos
+            </label>
+            <button id="guardar-datos" type="submit" class="boton">Guardar</button>
+          </form>
+        </section>
+
+        <section class="tarjeta" aria-labelledby="titulo-dia">
+          <h2 id="titulo-dia" class="titulo-seccion">Ver un día</h2>
+          <p class="mb-3 text-sm text-slate-500">Para revisar cómo queda el horario con las reglas y excepciones cargadas.</p>
+          <div class="mb-3 max-w-xs">
+            <label for="dia-consulta" class="etiqueta-campo">Fecha</label>
+            <input id="dia-consulta" type="date" class="campo">
+          </div>
+          <p id="horario-dia" role="status" class="text-slate-700"></p>
+        </section>
+      </div>
+
+      <section class="tarjeta mt-6" aria-labelledby="titulo-reglas">
+        <h2 id="titulo-reglas" class="titulo-seccion">Horario habitual</h2>
+        <p class="mb-4 text-sm text-slate-500">Una fila por día y franja. Para cambiar un horario desde una fecha, editá la regla vieja con "Vigente hasta" y agregá la nueva: así los días anteriores no cambian.</p>
+        <p id="exito-reglas" role="status" hidden class="aviso-exito"></p>
+        <div class="overflow-x-auto">
+          <table class="tabla min-w-[40rem]">
+            <thead>
+              <tr>
+                <th>Día</th>
+                <th>Horario</th>
+                <th>Repetición</th>
+                <th>Vigencia</th>
+                <th><span class="sr-only">Acciones</span></th>
+              </tr>
+            </thead>
+            <tbody id="filas-reglas"></tbody>
+          </table>
+        </div>
+        <p id="vacio-reglas" hidden class="py-4 text-center text-slate-500">Sin horario habitual. Las agendas irregulares se abren con aperturas.</p>
+
+        <form id="form-regla" class="mt-6 border-t border-slate-200 pt-5" novalidate>
+          <h3 id="titulo-form-regla" class="mb-3 font-medium text-slate-900">Agregar una franja</h3>
+          <p id="error-regla" role="alert" hidden class="aviso-error"></p>
+          <div class="grid gap-4 sm:grid-cols-3 lg:grid-cols-7">
+            <div>
+              <label for="regla-dia" class="etiqueta-campo">Día</label>
+              <select id="regla-dia" class="campo"></select>
+            </div>
+            <div>
+              <label for="regla-inicio" class="etiqueta-campo">Desde</label>
+              <input id="regla-inicio" type="time" class="campo" value="09:00">
+            </div>
+            <div>
+              <label for="regla-fin" class="etiqueta-campo">Hasta</label>
+              <input id="regla-fin" type="time" class="campo" value="12:00">
+            </div>
+            <div>
+              <label for="regla-cada" class="etiqueta-campo">Repetición</label>
+              <select id="regla-cada" class="campo">
+                <option value="1">Todas las semanas</option>
+                <option value="2">Una sí y otra no</option>
+                <option value="3">Cada 3 semanas</option>
+                <option value="4">Cada 4 semanas</option>
+              </select>
+            </div>
+            <div id="campo-referencia" hidden>
+              <label for="regla-referencia" class="etiqueta-campo">Un día que atiende</label>
+              <input id="regla-referencia" type="date" class="campo">
+            </div>
+            <div>
+              <label for="regla-desde" class="etiqueta-campo">Vigente desde</label>
+              <input id="regla-desde" type="date" class="campo">
+            </div>
+            <div>
+              <label for="regla-hasta" class="etiqueta-campo">Vigente hasta</label>
+              <input id="regla-hasta" type="date" class="campo">
+            </div>
+          </div>
+          <div class="mt-4 flex flex-wrap gap-2">
+            <button id="guardar-regla" type="submit" class="boton">Agregar franja</button>
+            <button id="cancelar-regla" type="button" class="boton-secundario" hidden>Cancelar edición</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="tarjeta mt-6" aria-labelledby="titulo-excepciones">
+        <h2 id="titulo-excepciones" class="titulo-seccion">Excepciones de hoy en adelante</h2>
+        <p class="mb-4 text-sm text-slate-500">Un bloqueo quita horario (licencias, feriados, congresos). Una apertura suma horario en una fecha (por ejemplo, el sábado del mes en que atiende).</p>
+        <p id="exito-excepciones" role="status" hidden class="aviso-exito"></p>
+        <div class="overflow-x-auto">
+          <table class="tabla min-w-[36rem]">
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Horario</th>
+                <th>Tipo</th>
+                <th>Motivo</th>
+                <th><span class="sr-only">Acciones</span></th>
+              </tr>
+            </thead>
+            <tbody id="filas-excepciones"></tbody>
+          </table>
+        </div>
+        <p id="vacio-excepciones" hidden class="py-4 text-center text-slate-500">No hay excepciones cargadas.</p>
+
+        <form id="form-excepcion" class="mt-6 border-t border-slate-200 pt-5" novalidate>
+          <h3 class="mb-3 font-medium text-slate-900">Agregar una excepción</h3>
+          <p id="error-excepcion" role="alert" hidden class="aviso-error"></p>
+          <div class="grid gap-4 sm:grid-cols-3 lg:grid-cols-6">
+            <div>
+              <label for="excepcion-fecha" class="etiqueta-campo">Fecha</label>
+              <input id="excepcion-fecha" type="date" class="campo">
+            </div>
+            <div>
+              <label for="excepcion-tipo" class="etiqueta-campo">Tipo</label>
+              <select id="excepcion-tipo" class="campo">
+                <option value="BLOQUEO">Bloqueo</option>
+                <option value="APERTURA">Apertura</option>
+              </select>
+            </div>
+            <div>
+              <label for="excepcion-inicio" class="etiqueta-campo">Desde</label>
+              <input id="excepcion-inicio" type="time" class="campo" value="09:00">
+            </div>
+            <div>
+              <label for="excepcion-fin" class="etiqueta-campo">Hasta</label>
+              <input id="excepcion-fin" type="time" class="campo" value="12:00">
+            </div>
+            <div class="sm:col-span-2">
+              <label for="excepcion-motivo" class="etiqueta-campo">Motivo <span class="font-normal text-slate-400">(opcional)</span></label>
+              <input id="excepcion-motivo" class="campo" maxlength="200" autocomplete="off" placeholder="Feriado, licencia, congreso…">
+            </div>
+          </div>
+          <label id="campo-todo-el-dia" class="mt-3 flex items-center gap-2 text-slate-700">
+            <input id="excepcion-todo-el-dia" type="checkbox" class="h-4 w-4 accent-brand-strong">
+            Todo el día
+          </label>
+          <button id="guardar-excepcion" type="submit" class="boton mt-4">Agregar excepción</button>
+        </form>
+      </section>
+
+      <section class="tarjeta mt-6" aria-labelledby="titulo-practicas">
+        <h2 id="titulo-practicas" class="titulo-seccion">Consultas y prácticas</h2>
+        <p class="mb-4 text-sm text-slate-500">Lo que se puede reservar en esta agenda, con su duración y las obras sociales que lo cubren. Sin ninguna marcada, es solo particular. No se borran: se desactivan.</p>
+        <p id="exito-practicas" role="status" hidden class="aviso-exito"></p>
+        <div class="overflow-x-auto">
+          <table class="tabla min-w-[40rem]">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Tipo</th>
+                <th>Duración</th>
+                <th>Cobertura</th>
+                <th><span class="sr-only">Acciones</span></th>
+              </tr>
+            </thead>
+            <tbody id="filas-practicas"></tbody>
+          </table>
+        </div>
+        <p id="vacio-practicas" hidden class="py-4 text-center text-slate-500">Todavía no hay consultas ni prácticas.</p>
+
+        <form id="form-practica" class="mt-6 border-t border-slate-200 pt-5" novalidate>
+          <h3 id="titulo-form-practica" class="mb-3 font-medium text-slate-900">Agregar una consulta o práctica</h3>
+          <p id="error-practica" role="alert" hidden class="aviso-error"></p>
+          <div class="grid gap-4 sm:grid-cols-[10rem_minmax(0,1fr)_8rem]">
+            <div>
+              <label for="practica-tipo" class="etiqueta-campo">Tipo</label>
+              <select id="practica-tipo" class="campo">
+                <option value="CONSULTA">Consulta</option>
+                <option value="PRACTICA">Práctica</option>
+              </select>
+            </div>
+            <div>
+              <label for="practica-nombre" class="etiqueta-campo">Nombre</label>
+              <input id="practica-nombre" class="campo" maxlength="100" autocomplete="off" placeholder="Consulta, Espirometría…">
+            </div>
+            <div>
+              <label for="practica-duracion" class="etiqueta-campo">Minutos</label>
+              <input id="practica-duracion" type="number" class="campo" min="5" max="720" step="5" value="20">
+            </div>
+          </div>
+          <label id="campo-practica-activa" hidden class="mt-3 flex items-center gap-2 text-slate-700">
+            <input id="practica-activa" type="checkbox" class="h-4 w-4 accent-brand-strong" checked>
+            Activa: se ofrece para turnos nuevos
+          </label>
+          <fieldset class="mt-4">
+            <legend class="etiqueta-campo">Obras sociales que la cubren</legend>
+            <div class="mb-2 flex gap-2">
+              <button id="marcar-todas" type="button" class="boton-secundario">Marcar todas</button>
+              <button id="desmarcar-todas" type="button" class="boton-secundario">Ninguna (solo particular)</button>
+            </div>
+            <div id="coberturas" class="grid gap-x-4 gap-y-1.5 sm:grid-cols-2 lg:grid-cols-4"></div>
+            <p id="sin-obras-sociales" hidden class="text-sm text-slate-500">No hay obras sociales cargadas: se cargan en <a href="catalogos.html" class="enlace">Catálogos</a>.</p>
+          </fieldset>
+          <div class="mt-4 flex flex-wrap gap-2">
+            <button id="guardar-practica" type="submit" class="boton">Agregar</button>
+            <button id="cancelar-practica" type="button" class="boton-secundario" hidden>Cancelar edición</button>
+          </div>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <script type="module" src="js/configurar-agenda.js"></script>
+</body>
+</html>

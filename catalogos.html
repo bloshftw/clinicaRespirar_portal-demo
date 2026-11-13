@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Catálogos · Portal Clínica Respirar</title>
+  <link rel="icon" type="image/svg+xml" href="assets/img/isotipo.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <link rel="stylesheet" href="css/output.css">
+</head>
+<body class="flex min-h-screen flex-col">
+  <header class="border-b border-slate-200 bg-white">
+    <div class="mx-auto flex max-w-6xl flex-wrap items-center gap-x-6 gap-y-2 px-4 py-3">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="assets/img/isotipo.svg" alt="" class="h-9 w-9">
+        <span class="leading-tight">
+          <span class="block font-black text-brand-strong">Clínica Respirar</span>
+          <span class="block text-sm text-slate-500">Portal</span>
+        </span>
+      </a>
+      <nav id="menu" aria-label="Secciones del portal" class="flex flex-wrap gap-1 text-sm"></nav>
+    </div>
+  </header>
+
+  <main class="mx-auto w-full max-w-6xl flex-1 px-4 py-8">
+    <p id="cargando" class="text-center text-slate-500">Cargando…</p>
+
+    <div id="contenido" hidden>
+      <h1 class="mb-1 text-2xl font-black text-slate-900">Catálogos</h1>
+      <p class="mb-6 text-slate-600">No se borran: se desactivan, así las fichas y los turnos que ya los usan no cambian.</p>
+
+      <div class="grid gap-6 lg:grid-cols-2">
+        <section class="tarjeta" data-catalogo="obras-sociales" aria-labelledby="titulo-obras-sociales">
+          <h2 id="titulo-obras-sociales" class="titulo-seccion">Obras sociales</h2>
+          <form class="mb-4 flex gap-2" data-parte="formulario" novalidate>
+            <label for="nueva-obra-social" class="sr-only">Nombre de la obra social nueva</label>
+            <input id="nueva-obra-social" class="campo" maxlength="100" placeholder="Nombre de la obra social" autocomplete="off" data-parte="nombre">
+            <button type="submit" class="boton shrink-0" data-parte="agregar">Agregar</button>
+          </form>
+          <p role="alert" hidden class="aviso-error" data-parte="error"></p>
+          <p role="status" hidden class="aviso-exito" data-parte="exito"></p>
+          <ul class="divide-y divide-slate-100" data-parte="lista"></ul>
+          <p hidden class="py-4 text-center text-slate-500" data-parte="vacio">Todavía no hay obras sociales.</p>
+        </section>
+
+        <section class="tarjeta" data-catalogo="especialidades" aria-labelledby="titulo-especialidades">
+          <h2 id="titulo-especialidades" class="titulo-seccion">Especialidades</h2>
+          <form class="mb-4 flex gap-2" data-parte="formulario" novalidate>
+            <label for="nueva-especialidad" class="sr-only">Nombre de la especialidad nueva</label>
+            <input id="nueva-especialidad" class="campo" maxlength="100" placeholder="Nombre de la especialidad" autocomplete="off" data-parte="nombre">
+            <button type="submit" class="boton shrink-0" data-parte="agregar">Agregar</button>
+          </form>
+          <p role="alert" hidden class="aviso-error" data-parte="error"></p>
+          <p role="status" hidden class="aviso-exito" data-parte="exito"></p>
+          <ul class="divide-y divide-slate-100" data-parte="lista"></ul>
+          <p hidden class="py-4 text-center text-slate-500" data-parte="vacio">Todavía no hay especialidades.</p>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script type="module" src="js/catalogos.js"></script>
+</body>
+</html>
